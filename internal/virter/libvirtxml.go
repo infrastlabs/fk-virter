@@ -216,11 +216,12 @@ func (v *Virter) vmXML(vm VMConfig, mac string, meta *VMMeta) (string, error) {
 			Graphics: []lx.DomainGraphic{
 				{VNC: vncGraphics},
 			},
-			// For some reason, debian stretch doesn't boot without a video card. The virtio model seems to stable
-			// enough, even for multi-arch scenarios.
-			Videos: []lx.DomainVideo{
-				{Model: lx.DomainVideoModel{Type: "virtio"}},
-			},
+			// https://github.com/LINBIT/virter/issues/13
+			// // For some reason, debian stretch doesn't boot without a video card. The virtio model seems to stable
+			// // enough, even for multi-arch scenarios.
+			// Videos: []lx.DomainVideo{
+			// 	{Model: lx.DomainVideoModel{Type: "virtio"}},
+			// },
 			MemBalloon: &lx.DomainMemBalloon{
 				Model: "virtio",
 				Alias: &lx.DomainAlias{
