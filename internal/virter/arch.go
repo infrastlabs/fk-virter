@@ -156,7 +156,8 @@ func (c *CpuArch) CPU() *lx.DomainCPU {
 func (c *CpuArch) Machine() string {
 	switch c.get() {
 	case CpuArchAMD64:
-		return "q35"
+		// return "q35"
+		return "pc"
 	case CpuArchARM64:
 		return "virt"
 	case CpuArchPPC64LE:
