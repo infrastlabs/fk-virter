@@ -105,28 +105,42 @@ func (c *CpuArch) Firmware() string {
 func (c *CpuArch) CPU() *lx.DomainCPU {
 	arch := c.get()
 
-	if arch == CpuArchNative {
+	/* if arch == CpuArchNative {
 		return &lx.DomainCPU{
-			Mode: "host-model",
+			Mode: "host-model", // CPU mode 'host-model' for aarch64 kvm domain on aarch64 host is not supported by hypervisor
 		}
-	}
+	} */
 
 	switch arch {
 	case CpuArchAMD64:
+		if arch == CpuArchNative {
+			return &lx.DomainCPU{
+				Mode: "host-model", // x64: cp upper
+			}
+		}
 		return &lx.DomainCPU{
 			Mode:  "custom",
 			Match: "exact",
 			Model: &lx.DomainCPUModel{
-				Value:    "max",
+				Value:    "max", //could not create (start) domain: internal error: Unknown CPU model max
 				Fallback: "forbid",
 			},
 		}
 	case CpuArchARM64:
+		if arch == CpuArchNative {
+			return &lx.DomainCPU{
+				Mode: "host-passthrough", // arm64: cp upper
+			}
+		}
+		// kvm_init_vcpu: kvm_arch_init_vcpu failed (0): Invalid argument; >> <cpu mode='host-passthrough' check='none'/>
 		return &lx.DomainCPU{
 			Mode:  "custom",
 			Match: "exact",
 			Model: &lx.DomainCPUModel{
-				Value:    "cortex-a72",
+				// Value:    "cortex-a72",
+				// unsupported configuration: CPU model cortex-a55 is not supported by hypervisor
+				// Value:    "cortex-a55", //lscpu: Model name:            Cortex-A55
+				Value:    "cortex-a57", 
 				Fallback: "forbid",
 			},
 		}
