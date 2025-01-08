@@ -47,7 +47,7 @@ func (SSHClientBuilder) NewShellClient(hostPort string, sshConfig ssh.ClientConf
 func extraAuthorizedKeys() ([]string, error) {
 	publicKeys := []string{}
 
-	userPublicKey := viper.GetString("auth.user_public_key")
+	userPublicKey := viper.GetString("auth.user_public_key") //
 	if userPublicKey != "" {
 		publicKeys = append(publicKeys, userPublicKey)
 	}

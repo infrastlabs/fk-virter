@@ -221,7 +221,7 @@ func vmRunCommand() *cobra.Command {
 						VCPUs:              vcpus,
 						ID:                 id,
 						StaticDHCP:         viper.GetBool("libvirt.static_dhcp"),
-						ExtraSSHPublicKeys: extraAuthorizedKeys,
+						ExtraSSHPublicKeys: extraAuthorizedKeys, //
 						ConsolePath:        consolePath,
 						Disks:              disks,
 						DiskCache:          viper.GetString("libvirt.disk_cache"),
