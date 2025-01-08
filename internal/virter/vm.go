@@ -223,7 +223,7 @@ func (v *Virter) VMRun(vmConfig VMConfig) error {
 	}
 
 	log.Debug("Create cloud-init volume")
-	_, err = v.createCIData(vmConfig, hostkey)
+	_, err = v.createCIData(vmConfig, hostkey)  //entry1
 	if err != nil {
 		return err
 	}

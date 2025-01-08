@@ -160,9 +160,10 @@ func (v *Virter) userData(vmName string, sshPublicKeys []string, hostkey sshkeys
 	return renderTemplate("user-data", templateUserData, templateData)
 }
 
+// CIData: for cloud-init;
 func (v *Virter) createCIData(vmConfig VMConfig, hostkey sshkeys.HostKey) (*RawLayer, error) {
 	vmName := vmConfig.Name
-	sshPublicKeys := append(vmConfig.ExtraSSHPublicKeys, string(v.sshkeys.PublicKey()))
+	sshPublicKeys := append(vmConfig.ExtraSSHPublicKeys, string(v.sshkeys.PublicKey())) //
 
 	metaData, err := v.metaData(vmName)
 	if err != nil {
@@ -179,14 +180,14 @@ func (v *Virter) createCIData(vmConfig VMConfig, hostkey sshkeys.HostKey) (*RawL
 		mounts[i] = m.GetVMPath()
 	}
 
-	userData, err := v.userData(vmName, sshPublicKeys, hostkey, mounts)
+	userData, err := v.userData(vmName, sshPublicKeys, hostkey, mounts) //
 	if err != nil {
 		return nil, err
 	}
 
 	files := map[string][]byte{
 		"meta-data": []byte(metaData),
-		"user-data": []byte(userData),
+		"user-data": []byte(userData), //
 	}
 
 	// Only explicitly add network config if we have something to configure.
@@ -195,7 +196,7 @@ func (v *Virter) createCIData(vmConfig VMConfig, hostkey sshkeys.HostKey) (*RawL
 		files["network-config"] = []byte(networkConfig)
 	}
 
-	ciData, err := GenerateISO(files)
+	ciData, err := GenerateISO(files) //生成ISO数据
 	if err != nil {
 		return nil, fmt.Errorf("failed to generate ISO: %w", err)
 	}
@@ -205,7 +206,7 @@ func (v *Virter) createCIData(vmConfig VMConfig, hostkey sshkeys.HostKey) (*RawL
 		return nil, err
 	}
 
-	err = ciLayer.Upload(bytes.NewReader(ciData))
+	err = ciLayer.Upload(bytes.NewReader(ciData)) //CI.ISO数据写入raw盘;
 	if err != nil {
 		return nil, fmt.Errorf("failed to transfer cloud-init data to libvirt: %w", err)
 	}
