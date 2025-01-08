@@ -26,7 +26,7 @@ func InitVirter() (*virter.Virter, error) {
 	network := viper.GetString("libvirt.network")
 
 	privateKeyPath := viper.GetString("auth.virter_private_key_path")
-	publicKeyPath := viper.GetString("auth.virter_public_key_path")
+	publicKeyPath := viper.GetString("auth.virter_public_key_path") //2取值; 
 
 	keyStore, err := sshkeys.NewKeyStore(privateKeyPath, publicKeyPath)
 	if err != nil {

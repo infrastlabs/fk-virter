@@ -147,7 +147,7 @@ func initConfig() {
 		viper.SetConfigName("virter")
 
 		// When using the default config file location, make that also the default key location
-		viper.SetDefault("auth.virter_public_key_path", filepath.Join(p, "id_rsa.pub"))
+		viper.SetDefault("auth.virter_public_key_path", filepath.Join(p, "id_rsa.pub")) //1设值; 
 		viper.SetDefault("auth.virter_private_key_path", filepath.Join(p, "id_rsa"))
 	}
 
