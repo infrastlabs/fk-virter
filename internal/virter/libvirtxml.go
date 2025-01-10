@@ -217,11 +217,12 @@ func (v *Virter) vmXML(vm VMConfig, mac string, meta *VMMeta) (string, error) {
 				{VNC: vncGraphics},
 			},
 			// https://github.com/LINBIT/virter/issues/13
-			// // For some reason, debian stretch doesn't boot without a video card. The virtio model seems to stable
-			// // enough, even for multi-arch scenarios.
-			// Videos: []lx.DomainVideo{
-			// 	{Model: lx.DomainVideoModel{Type: "virtio"}},
-			// },
+			// 23.03注释显卡; 25.1:revert(x64.rocky9/opensuse-micro-v61/armbian-v22 进不了系统,qemu-x86_64 cpu:100%)
+			// For some reason, debian stretch doesn't boot without a video card. The virtio model seems to stable
+			// enough, even for multi-arch scenarios.
+			Videos: []lx.DomainVideo{
+				{Model: lx.DomainVideoModel{Type: "virtio"}},
+			},
 			MemBalloon: &lx.DomainMemBalloon{
 				Model: "virtio",
 				Alias: &lx.DomainAlias{
