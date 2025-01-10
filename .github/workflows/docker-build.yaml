@@ -74,9 +74,11 @@ jobs:
           # repository:  #Defaults to GITHUB_REPOSITORY env variable
           # body_path: 
           # target_commitish
+          #25.1.10: 暴露原文件，23.2-kylin下upx版virter段错误;
           files: |
             # LICENSE
             # .github/workflows/.ws/pkgs/nginx*.tar.gz
             build/virter-*.tar.gz
+            build/bin/virter-*
 
 
