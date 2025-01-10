@@ -68,7 +68,7 @@ onePack(){
   #upx
   cd $cur/../build
     rm -f ./virter-linux-$arch; upx -7 bin/virter-linux-$arch -o ./virter-linux-$arch
-    tar -zcvf ./virter-$version-$seq-$os-$arch.tar.gz virter-linux-$arch #--exclude-from=../../.tarignore 
+    tar -zcvf ./virter-$version-$seq-$os-${arch}-upx.tar.gz virter-linux-$arch #--exclude-from=../../.tarignore 
     # clear
     # rm -rf $cur/build/virter-linux-$arch
 }
