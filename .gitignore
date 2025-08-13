@@ -5,4 +5,4 @@
 
 /tests/vms.toml
 /build/bin/*
-/build/virter-linux*
+/build/virter-*
