@@ -75,6 +75,7 @@ onePack(){
 onePack arm & #DO batchMode
 onePack arm64 &
 onePack amd64 &
+onePack ppc64le &
 wait
 
 ls -lh $cur/../build |grep "virter-linux-"
